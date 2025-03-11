@@ -5,11 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-public class Flower {
+public class Flowers {
  @Id
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
+
+ @Column(columnDefinition = "TEXT")
  private String daily_nurturing;
+
+ @Column(columnDefinition = "TEXT")
  private String gardening_tips;
 
  @JsonIgnore
@@ -31,5 +35,15 @@ public class Flower {
  }
  public String getGardening_tips() {
      return gardening_tips;
+ }
+
+ public void setGardening_tips(String gardening_tips) {
+     this.gardening_tips = gardening_tips;
+ }
+ public Plants getPlants() {
+     return plants;
+ }
+ public void setPlants(Plants plants) {
+     this.plants = plants;
  }
 }
