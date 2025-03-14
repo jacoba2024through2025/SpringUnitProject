@@ -3,6 +3,7 @@ package com.example.springgarden.springevents;
 import com.example.springgarden.plants.Plants;
 import com.example.springgarden.plants.PlantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,6 @@
 package com.example.springgarden;
+import com.example.springgarden.springevents.SpringEvents;
+import com.example.springgarden.springevents.SpringEventsService;
 import com.example.springgarden.fruits.Fruit;
 import com.example.springgarden.fruits.FruitService;
 import com.example.springgarden.vegetables.VegetableService;
@@ -11,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.List;
 
 @Controller
@@ -28,6 +29,9 @@ public class HtmlController {
     @Autowired
     private FruitService fruitService;
 
+    @Autowired
+    private SpringEventsService springEventsService;
+
     @GetMapping("/home")
     public String home(Model model) {
         // Fetch all plants or specific plant data
@@ -40,11 +44,14 @@ public class HtmlController {
 
         List<Fruit> fruitsList = fruitService.getAllFruits();
 
+        List<SpringEvents> springEventsList = springEventsService.getAllSpringEvents();
+
         // Add plants and flowers data to the model
         model.addAttribute("plants", plantsList);
         model.addAttribute("flowers", flowersList);  // Pass flowers to the model
         model.addAttribute("vegetables", vegetablesList);
         model.addAttribute("fruits", fruitsList);
+        model.addAttribute("springEvents", springEventsList);
         // If you just want to pass the name of a specific plant, e.g., the first one
         if (!plantsList.isEmpty()) {
             model.addAttribute("name", plantsList.get(0).getName()); // Passing the first plant's name

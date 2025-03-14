@@ -4,13 +4,15 @@ import com.example.springgarden.flowers.Flowers;
 import com.example.springgarden.fruits.Fruit;
 import com.example.springgarden.springevents.SpringEvents;
 import com.example.springgarden.vegetables.Vegetables;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
+//@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 public class Plants {
     @Id
@@ -37,7 +39,7 @@ public class Plants {
     @OneToMany(mappedBy = "plants", cascade = CascadeType.REMOVE)
     private List<Flowers> flowers;
     //Many to many - Plants - Spring Events
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(
             name = "plants_spring_events",  // Join table name
@@ -100,7 +102,6 @@ public class Plants {
     public List<SpringEvents> getSpringEvents() {
         return springEvents;
     }
-
     public void setSpringEvents(List<SpringEvents> springEvents) {
         this.springEvents = springEvents;
     }

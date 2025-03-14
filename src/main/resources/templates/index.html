@@ -59,6 +59,19 @@
     </div>
 </ul>
 
+<h2 class="fruit_head">Spring Events</h2>
+<ul class>
+    <div class="div-item">
+        <th:block th:each="springevent : ${springEvents}">
+            <li class="list-item" th:text="${springevent.name}">Event Name</li>
+            <li class="list-item" th:text="${springevent.startDate}">Start Date</li>
+            <li class="list-item" th:text="${springevent.endDate}">End Date</li>
+            <li class="list-item" th:text="${springevent.description}">Description</li>
+
+        </th:block>
+    </div>
+</ul>
+
 
 </body>
 </html>

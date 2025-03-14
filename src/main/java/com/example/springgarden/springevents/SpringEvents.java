@@ -1,12 +1,15 @@
 package com.example.springgarden.springevents;
 
 import com.example.springgarden.plants.Plants;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property="id")
 @Entity
 public class SpringEvents {
 
@@ -19,11 +22,10 @@ public class SpringEvents {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "springEvents")
+    private List<Plants> plants;
 
 
-    private List<Plants> plants = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -77,7 +79,6 @@ public class SpringEvents {
     public void setPlants(List<Plants> plants) {
         this.plants = plants;
     }
-
 
     public LocalDate getEndDate() {
         return endDate;
