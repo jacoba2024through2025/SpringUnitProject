@@ -1,5 +1,7 @@
 package com.example.springgarden.springevents;
 
+import com.example.springgarden.plants.Plants;
+import com.example.springgarden.plants.PlantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,8 @@ public class SpringEventsController {
     @Autowired
     private SpringRepository springRepository;
 
+    @Autowired
+    PlantsRepository plantsRepository;
     //Method for creating an event
     @PostMapping
     public SpringEvents createEvent(@RequestBody SpringEvents events) {
@@ -59,6 +63,25 @@ public class SpringEventsController {
     @DeleteMapping("/{id}")
     public void deleteEvent(@PathVariable Long id) {
         springRepository.deleteById(id);
+    }
+
+    // Add a Plant to a specific SpringEvent
+    @PutMapping("/{eventId}/addPlant/{plantId}")
+    public SpringEvents addPlantToSpringEvent(@PathVariable Long eventId, @PathVariable Long plantId) {
+        SpringEvents springEvent = springRepository.findById(eventId)
+                .orElseThrow(() -> new RuntimeException("Event not found"));
+        Plants plant = plantsRepository.findById(plantId)
+                .orElseThrow(() -> new RuntimeException("Plant not found"));
+
+
+        springEvent.getPlants().add(plant);
+        plant.getSpringEvents().add(springEvent);
+
+
+        springRepository.save(springEvent);
+        plantsRepository.save(plant);
+
+        return springEvent;
     }
 }
 

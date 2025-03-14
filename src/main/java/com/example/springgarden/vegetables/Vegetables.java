@@ -19,10 +19,14 @@ public class Vegetables {
             strategy = GenerationType.SEQUENCE,
             generator = "vegetables_sequence"
     )
-    private String name;
-    private String description;
-    private String daily_nurturing;
     private Long vegetables_id;
+    private String veggie_name;
+
+    @Column(columnDefinition = "TEXT")
+    private String daily_nurturing;
+
+
+    @Column(columnDefinition = "TEXT")
     private String gardening_tips;
 
     @JsonIgnore
@@ -30,19 +34,20 @@ public class Vegetables {
     @JoinColumn(name = "plant_id")
     private Plants plants;
     /// /////////////////////////////////////////////////////////////
-    public Vegetables(Long fruit_id, String name, String description, String daily_nurturing, String gardening_tips) {
+    public Vegetables(Long fruit_id,String daily_nurturing, String gardening_tips, String veggie_name) {
         this.vegetables_id = fruit_id;
-        this.name = name;
-        this.description = description;
+        this.veggie_name = veggie_name;
+
+
         this.daily_nurturing = daily_nurturing;
         this.gardening_tips = gardening_tips;
     }
     /// /////////////////////////////////////////
-    public Vegetables(String description, String name, String daily_nurturing, String gardening_tips) {
-        this.description = description;
-        this.name = name;
+    public Vegetables(String daily_nurturing, String gardening_tips, String veggie_name) {
+
         this.daily_nurturing = daily_nurturing;
         this.gardening_tips = gardening_tips;
+        this.veggie_name = veggie_name;
     }
 
     public Vegetables() {
@@ -50,13 +55,12 @@ public class Vegetables {
     }
 
 
-    public String getVegetableName(){return name;}
-
-    public void setVegetableName(String name){this.name=name;}
-
-    public String getDescription() {return description;}
-
-    public void setDescription(String description){this.description=description;}
+    public String getVeggie_name() {
+        return veggie_name;
+    }
+    public void setVeggie_name(String veggie_name) {
+        this.veggie_name = veggie_name;
+    }
 
     public Long getVegetable_id() {return vegetables_id;}
 
@@ -75,8 +79,7 @@ public class Vegetables {
     public String toString() {
         return "Vegetable{" +
                 "Vegetable_id=" + vegetables_id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+
                 ", daily_nurturing='" + daily_nurturing + '\'' +
                 ", gardening_tips='" + gardening_tips + '\'' +
                 '}';

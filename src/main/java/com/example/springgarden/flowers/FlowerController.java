@@ -35,7 +35,7 @@ public class FlowerController {
     }
 
     //Add Flower to plant
-    @PutMapping("/{flowerId}/users/{plantId}")
+    @PutMapping("/{flowerId}/plants/{plantId}")
     public Flowers addPostToUser(@PathVariable Long flowerId, @PathVariable Long plantId) {
 
 
@@ -47,18 +47,18 @@ public class FlowerController {
                 .orElseThrow(() -> new RuntimeException("Plant not found"));
 
         flowers.setPlants(plants);
-        post.setMember(user);
 
 
-        if (!plants.get) {
-            user.getPosts().add(post);
+
+        if (!plants.getFlowers().contains(flowers)) {
+            plants.getFlowers().add(flowers);
         }
 
 
-        postRepository.save(post);
-        membersRepository.save(user);
+        flowerRepository.save(flowers);
+        plantsRepository.save(plants);
 
-        return post;
+        return flowers;
     }
 
     //Update an existing flower

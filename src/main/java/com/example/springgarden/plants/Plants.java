@@ -2,27 +2,49 @@ package com.example.springgarden.plants;
 
 import com.example.springgarden.flowers.Flowers;
 import com.example.springgarden.fruits.Fruit;
+import com.example.springgarden.springevents.SpringEvents;
 import com.example.springgarden.vegetables.Vegetables;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @Entity
 public class Plants {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+
+    @Column(columnDefinition = "TEXT")
+    private String imageFilename;
+
+
+
+    @Column(columnDefinition = "TEXT")
     private String name;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     //One to many - Plants - Fruit, Flower, Vegatables
-    @OneToMany(mappedBy = "plants")
+    @OneToMany(mappedBy = "plants", cascade = CascadeType.REMOVE)
     private List<Fruit> fruits;
-    @OneToMany(mappedBy = "plants")
+    @OneToMany(mappedBy = "plants", cascade = CascadeType.REMOVE)
     private List<Vegetables> vegetables;
-    @OneToMany(mappedBy = "plants")
+    @OneToMany(mappedBy = "plants", cascade = CascadeType.REMOVE)
     private List<Flowers> flowers;
-
+    //Many to many - Plants - Spring Events
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "plants_spring_events",  // Join table name
+            joinColumns = @JoinColumn(name = "plant_id"), // Foreign key for plants
+            inverseJoinColumns = @JoinColumn(name = "spring_event_id") // Foreign key for spring events
+    )
+    private List<SpringEvents> springEvents;
 
     public Long getId() {
         return id;
@@ -40,6 +62,15 @@ public class Plants {
     public String getDescription() {
         return description;
     }
+
+    public String getImageFilename() {
+        return imageFilename;
+    }
+
+    public void setImageFilename(String imageFilename) {
+        this.imageFilename = imageFilename;
+    }
+
 
     public List<Fruit> getFruits() {
         return fruits;
@@ -64,5 +95,13 @@ public class Plants {
 
     public List<Fruit> getFruitList() {
         return fruits;
+    }
+
+    public List<SpringEvents> getSpringEvents() {
+        return springEvents;
+    }
+
+    public void setSpringEvents(List<SpringEvents> springEvents) {
+        this.springEvents = springEvents;
     }
 }

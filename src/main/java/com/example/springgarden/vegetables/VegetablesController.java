@@ -1,7 +1,9 @@
 package com.example.springgarden.vegetables;
 
+import com.example.springgarden.plants.Plants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.springgarden.plants.PlantsRepository;
 
 import java.util.List;
 
@@ -10,6 +12,8 @@ import java.util.List;
 public class VegetablesController {
     @Autowired
     private VegetablesRepository vegetablesRepository;
+    @Autowired
+    private PlantsRepository plantsRepository;
 
     @PostMapping
     public Vegetables createVegetable(@RequestBody Vegetables vegetables) {
@@ -50,5 +54,32 @@ public class VegetablesController {
     @DeleteMapping
     public void deleteFlower(@PathVariable Long id) {
         vegetablesRepository.deleteById(id);
+    }
+
+    //Add Flower to plant
+    @PutMapping("/{vegetableId}/plants/{plantId}")
+    public Vegetables addPostToUser(@PathVariable Long vegetableId, @PathVariable Long plantId) {
+
+
+        Vegetables vegetables = vegetablesRepository.findById(vegetableId)
+                .orElseThrow(() -> new RuntimeException("Vegetable not found"));
+
+
+        Plants plants = plantsRepository.findById(plantId)
+                .orElseThrow(() -> new RuntimeException("Plant not found"));
+
+        vegetables.setPlants(plants);
+
+
+
+        if (!plants.getVegetables().contains(vegetables)) {
+            plants.getVegetables().add(vegetables);
+        }
+
+
+        vegetablesRepository.save(vegetables);
+        plantsRepository.save(plants);
+
+        return vegetables;
     }
 }

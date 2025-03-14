@@ -20,7 +20,11 @@ public class Fruit {
     )
 
     private Long fruit_id;
+    private String fruit_name;
+    @Column(columnDefinition = "TEXT")
     private String daily_nurturing;
+
+    @Column(columnDefinition = "TEXT")
     private String gardening_tips;
 
     @JsonIgnore
@@ -29,15 +33,16 @@ public class Fruit {
     private Plants plants;
 
 /// /////////////////////////////////////////////////////////////
-    public Fruit(Long fruit_id,  String daily_nurturing, String gardening_tips) {
+    public Fruit(Long fruit_id, String fruit_name,  String daily_nurturing, String gardening_tips) {
         this.fruit_id = fruit_id;
+        this.fruit_name = fruit_name;
 
         this.daily_nurturing = daily_nurturing;
         this.gardening_tips = gardening_tips;
     }
    /// /////////////////////////////////////////
-     public Fruit( String daily_nurturing, String gardening_tips) {
-
+     public Fruit( String daily_nurturing, String gardening_tips, String fruit_name) {
+        this.fruit_name = fruit_name;
         this.daily_nurturing = daily_nurturing;
         this.gardening_tips = gardening_tips;
     }
@@ -47,7 +52,12 @@ public class Fruit {
     }
 
 
-
+    public String getFruit_name() {
+        return fruit_name;
+    }
+    public void setFruit_name(String fruit_name) {
+         this.fruit_name = fruit_name;
+    }
 
     public Long getfruit_id() {return fruit_id;}
 

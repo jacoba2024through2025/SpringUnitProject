@@ -1,11 +1,12 @@
 package com.example.springgarden.springevents;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.time.LocalDate;
+import com.example.springgarden.plants.Plants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 @Entity
 public class SpringEvents {
 
@@ -18,6 +19,11 @@ public class SpringEvents {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "springEvents")
+
+
+    private List<Plants> plants = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -61,6 +67,15 @@ public class SpringEvents {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+
+    public List<Plants> getPlants() {
+        return plants;
+    }
+
+    public void setPlants(List<Plants> plants) {
+        this.plants = plants;
     }
 
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot with Thymeleaf</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<body>
+
+
+<img class="img-factor" th:src="@{/images/springtime.png}" alt="spring" />
+<h2 class="plant_head">Plants List</h2>
+<ul>
+    <th:block th:each="plant : ${plants}">
+        <div class="div-item">
+            <li class="list-item" th:text="${plant.name}">Plant Name</li>
+            <p class="p-tag" th:text="${plant.description}">Plant Description</p>
+            <img class="plant-image" th:src="@{/images/{image}(image=${plant.imageFilename})}" alt="Image of {plant.name}" />
+        </div>
+
+    </th:block>
+</ul>
+
+<h2 class="flow_head">Flowers List</h2>
+<ul class="flow_list">
+    <div class="div-item">
+        <th:block th:each="flower : ${flowers}">
+            <li class="list-item" th:text="${flower.name}">Flower Name</li>
+            <li class="list-item" th:text="${flower.daily_nurturing}">Daily Nurturing</li>
+            <li class="list-item" th:text="${flower.gardening_tips}">Gardening Tips</li>
+        </th:block>
+
+    </div>
+
+</ul>
+
+<h2 class="vege_head">Vegetable List</h2>
+<ul class="vege_list">
+    <div class="div-item">
+        <th:block th:each="vegetable : ${vegetables}">
+            <li class="list-item" th:text="${vegetable.veggie_name}">Vegetable Name</li>
+            <li class="list-item" th:text="${vegetable.daily_nurturing}">Daily Nurturing</li>
+            <li class="list-item" th:text="${vegetable.gardening_tips}">Gardening Tips</li>
+        </th:block>
+    </div>
+
+
+</ul>
+
+<h2 class="fruit_head">Fruits List</h2>
+<ul class>
+    <div class="div-item">
+        <th:block th:each="fruit : ${fruits}">
+            <li class="list-item" th:text="${fruit.fruit_name}">Fruit Name</li>
+            <li class="list-item" th:text="${fruit.daily_nurturing}">Daily Nurturing</li>
+            <li class="list-item" th:text="${fruit.gardening_tips}">Gardening Tips</li>
+        </th:block>
+    </div>
+</ul>
+
+
+</body>
+</html>
+

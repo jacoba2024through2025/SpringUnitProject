@@ -1,0 +1,81 @@
+.vege_head {
+    color: white;
+    font-family: sans-serif;
+    background: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 20vw;
+    margin-left: 20vw;
+    text-align: center;
+}
+.flow_head {
+    color: white;
+    font-family: sans-serif;
+    background: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 20vw;
+    margin-left: 20vw;
+    text-align: center;
+}
+.fruit_head {
+    color: white;
+    font-family: sans-serif;
+    background: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 20vw;
+    margin-left: 20vw;
+    text-align: center;
+}
+.plant_head {
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+    background: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 20vw;
+    margin-left: 20vw;
+}
+body {
+    background-color: #6bb13e;
+}
+
+.img-factor {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    border: 5px solid #619404;
+    border-radius: 10px;
+
+}
+
+.list-item {
+    color: white;
+    font-family: sans-serif;
+
+}
+
+.p-tag {
+    color: white;
+    font-family: sans-serif;
+}
+
+.div-item {
+    background: #619404;
+}
+
+li {
+    list-style: none;
+}
+
+.plant-image {
+    width: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid #619404;
+    border-radius: 10px;
+}
